@@ -1,8 +1,18 @@
-const tracksRouter = require('express').Router();
+const articlesRouter = require('express').Router();
+const articlesModel = require('../models/articles');
 
-tracksRouter.get('/', async (req, res) => {
-    const [articles] = await tracksModel.findAll();
+articlesRouter.get('/', async (req, res) => {
+    const [articles] = await articlesModel.findAllArticles(req.query);
     res.json(articles);
   });
 
-module.exports = tracksRouter;
+articlesRouter.get('/:id', async (req, res) => {
+    const [[name]] = await articlesModel.findOneArticleById(req.params.id);
+    if (name) {
+      res.json(name);
+    } else {
+      res.status(404).json();
+    }
+  });
+
+module.exports = articlesRouter;
