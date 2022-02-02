@@ -18,7 +18,27 @@ const findAllArticles = ({ limit, sortBy, orderBy }) => {
 
 const findOneArticleById = (id) => dataBase.query('SELECT * FROM articles WHERE id = ?', [id]);
 
+const insertArticle = ({ name, text }, image, idAdmin) => dataBase.query(
+  'INSERT INTO articles (`name`,`text`,`image`,`id_admin`) VALUES (?,?,?,?)',
+  [name, text, image, idAdmin],
+);
+
+const deleteArticle = (id) => dataBase.query('DELETE FROM articles WHERE id = ?', [id]);
+
+const updateArticle = (data, image, id) => {
+  console.log(data, image, id);
+  if (image) {
+    dataBase.query('UPDATE articles SET ?, image = ? WHERE id = ?', [data, image.path, id]);
+  } else {
+    dataBase.query('UPDATE articles SET ? WHERE id = ?', [data, id]);
+  }
+};
+
+
 module.exports = {
   findAllArticles,
-  findOneArticleById
+  findOneArticleById,
+  insertArticle,
+  deleteArticle,
+  updateArticle,
 };
