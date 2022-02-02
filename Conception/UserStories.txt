@@ -1,0 +1,8 @@
+As a user I can know my earning per day if I rent my vehicle with a form (multiple questions).
+
+As user I can read articles.
+
+As user I can contact the team with a form. 
+
+As user I can take appointment with the team.
+
