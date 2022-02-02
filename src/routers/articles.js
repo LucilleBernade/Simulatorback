@@ -15,6 +15,22 @@ articlesRouter.get('/:id', async (req, res) => {
     }
   });
 
+articlesRouter.post('/', async (req, res) => {
+  const [{insertId: id}] = await artcilesModel.insertArticle(req.body);
+  res.status(201).json({
+    id,
+    ...req.body
+  });
+});
 
+articlesRouter.delete('/:id', async (req, res) => {
+  await articlesModel.deleteArticle(req.params.id);
+  res.status(204).json();
+});
+
+articlesRouter.put('/:id', async (req, res) => {
+  await articlesModel.updateArticle(req.body, req.params.id);
+  res.status(204).json();
+});
 
 module.exports = articlesRouter;
